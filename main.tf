@@ -40,7 +40,7 @@ data "aws_ami" "ami" {
 resource "aws_instance" "main" {
   ami           =  data.aws_ami.ami.id
   instance_type = "t3.micro"
-  vpc_security_group_ids = [aws_security_group.main.id]
+  vpc_security_group_ids = [aws_security_group.main]
 
   tags = {
     Name = "web-server"
