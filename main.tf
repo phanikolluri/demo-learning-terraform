@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_security_group" "main" {
-  name = "sg-new"
+  name = "new-sg"
 
   ingress {
     from_port        = 22
@@ -40,7 +40,7 @@ data "aws_ami" "ami" {
 resource "aws_instance" "main" {
   ami           =  data.aws_ami.ami.id
   instance_type = "t3.micro"
-  vpc_security_group_ids = [aws_security_group.main]
+  vpc_security_group_ids = [aws_security_group.main.id]
 
   tags = {
     Name = "web-server"
