@@ -9,7 +9,7 @@ resource "aws_security_group" "main" {
     from_port        = 22
     to_port          = 22
     protocol         = "TCP"
-    cidr_blocks      = ["0.0.0.0/0"]
+    cidr_blocks      = ["49.204.107.21/32"]
   }
 
   ingress {
@@ -44,8 +44,8 @@ resource "aws_instance" "main" {
 
   user_data = <<-EOF
               #!/bin/bash
-              yum update -y
-              yum install -y httpd
+              dnf update -y
+              dnf install -y httpd
               systemctl start httpd
               systemctl enable httpd
               echo "Hello from Terraform EC2" > /var/www/html/index.html
