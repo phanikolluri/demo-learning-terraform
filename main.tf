@@ -42,6 +42,15 @@ resource "aws_instance" "main" {
   instance_type = "t3.micro"
   vpc_security_group_ids = [aws_security_group.main.id]
 
+  user_data = <<-EOF
+              #!/bin/bash
+              yum update -y
+              yum install -y httpd
+              systemctl start httpd
+              systemctl enable httpd
+              echo "Hello from Terraform EC2" > /var/www/html/index.html
+              EOF
+
   tags = {
     Name = "web-server"
   }
